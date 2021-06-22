@@ -1,24 +1,5 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+таски с этого дока
+https://docs.google.com/document/d/13PrbCS7JBPC1SzoiOyQZncq2siWOnxws3nJ0baZYMZE/edit
+Обзор ORM ActiveRecord. Миграции, модели, типы полей, выполнение запросов, ассоциации, валидации, колбеки. Тестирование моделей

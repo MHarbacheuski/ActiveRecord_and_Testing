@@ -1,0 +1,25 @@
+1. Запросить активных юзеров
+user = User.all
+user.where(status:"active")
+2. user = User.all
+   user.where(status:"inactive")
+3. Все юзеры и их посты(в одну цепочку вызовов)
+4. Посты, принадлежащие активным юзерам
+post.where(user:user,status:"active")
+5. Общее число постов
+    post = Post.all
+    post.count
+6. Посты начинающее с буквы а
+post.where('status LIKE "a%"')
+7. Вывести только посты с статусом inactive, under_review.
+post.where('status=="inactive" OR status=="under_review"')
+8. Удалить с вызовом колбеков(и без) неактивные посты
+post.where(status:"inactive").destroy_al
+9. Все посты с under_review статусом обновить на active статус с вызовом валидаций.
+post.where(status:"under_review").update(status:"active")
+10. Без вызова валидаций и колбеков удалить любой пост.
+post.first.destroy
+11.Пользователи у которых есть посты
+User.joins(:posts)
+12. Удалить какую-либо организацию с юзерами, у которых есть посты.
+Organization.joins(:posts).where(name:"Voka").destroy_all

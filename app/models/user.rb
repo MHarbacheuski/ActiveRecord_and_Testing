@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class User < ApplicationRecord
   validates :name, presence: true
   validates :state, presence: true
@@ -6,8 +7,8 @@ class User < ApplicationRecord
   validates_associated :posts
   after_initialize { p 'initialize' }
 
-  
   belongs_to :organization
   has_many :posts, dependent: :destroy
+  has_many :images, as: :imageable
 
 end

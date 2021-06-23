@@ -4,3 +4,13 @@ post.where(status: [:archived])
 задать -p.active!
 проверяем является ли таким p.active?
 выводим статус объекта, в котором он находится p.status
+3. Вывести все архивированные посты одного юзера(подсказка - используя особенность enum в связях).
+user.posts.where(status:[:archived])
+4. картинки для юзеров и постов с помощью полиморфа
+user.images
+post.images
+создал юзера user = User.create(organization:org, name: "Vitovt",state: "active")
+создал пост  post = Post.create(user:user,organization:org,status:"active")
+пушим в image
+user.images << Image.new(name:"kava")
+post.images << Image.new(name:"sugar")

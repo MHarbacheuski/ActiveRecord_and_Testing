@@ -1,0 +1,27 @@
+<br/>
+<br/>
+<h3 style="color: #B00100">All organizations</h3> <br/>
+<table class="table table-hover table-dark">
+  <thread>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Users</th>
+      <th scope="col">Posts</th>
+    </tr>
+  </thread>
+  <%- @organizations.each  do |organization|%>
+    <tbody>
+    <tr data-item_id="<%= organization.id %>">
+      <th scope="col"><%= organization.id %></th>
+      <th scope="col"><%= organization.name%></th>
+
+      <th><%= button_to 'Users', organization_users_path(organization), method: :get,
+                        class: "btn btn-secondary", style: "margin-right: 15px"%></th>
+      <th><%= button_to 'Posts', organization_posts_path(organization),method: :get,
+                    class: "btn btn-secondary", style: "margin-right: 15px"%></th>
+    </tr>
+    </tbody>
+  <% end %>
+
+</table>

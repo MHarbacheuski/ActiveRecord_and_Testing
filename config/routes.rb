@@ -10,6 +10,6 @@ Rails.application.routes.draw do
   end
 
   #users :posts
-  #root to: 'organizations#index'
+  root to: 'organizations#index'
 end
 

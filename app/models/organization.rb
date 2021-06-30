@@ -6,6 +6,6 @@ class Organization < ApplicationRecord
   after_find { p 'find' }
 
   has_many :users, dependent: :destroy
-  has_many :posts, through: :users, dependent: :destroy
+  has_many :posts, dependent: :destroy
 
 end

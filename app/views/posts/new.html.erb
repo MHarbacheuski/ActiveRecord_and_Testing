@@ -1,24 +1,17 @@
-</br>
-</br>
-<h4><%=@organizations.name %></h4>
-<table class="table table-hover table-dark">
-  <thread>
-    <tr>
-      <th scope="col">Users</th>
-      <th scope="col">Text</th>
-      <th scope="col">Status</th>
-      <th scope="col"></th>
-    </tr>
-  </thread>
-  <%- @user.each do |user|%>
-    <tbody>
-    <tr data-item_id="<%= user.name %>">
-      <th scope="col"><%= user.name%></th>
-      <th scope="col"><%= text_field_tag :text_post, @post.text_post%></th>
-      <th scope="col"><%= text_field_tag :status, @post.status%></th>
-      <th scope="col"><%= submit_tag "Save",class:"btn btn-large btn-primary" %></th>
-    </tr>
-    </tbody>
-  <% end %>
-</table>
+<h1><%= @organization.name %></h1>
+<%= form_with(model: @post, url: [@organization,@post]) do |post| %>
 
+  <p scope="col">
+    <%= post.collection_select 'user_id', @organization.users.order(:name), :id, :name %>
+  </p>
+  <p scope="col">
+    <%= post.collection_select 'text_post', @organization.posts.select(:text_post).distinct.order(:text_post),
+                               :text_post, :text_post %>
+  </p>
+  <p scope="col">
+    <%= post.collection_select 'status', @organization.posts.select(:status).distinct.order(:status),
+                               :status, :status %>
+  </p>
+  <p scope="col"><%= post.submit "Create", class: "btn btn-large btn-primary" %></p>
+
+<% end %>

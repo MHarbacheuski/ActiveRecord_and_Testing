@@ -19,7 +19,8 @@
 
 <div class ="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
   <div class ="btn-toolbar mr-2" role="group" aria-label="First group">
-    <%= render partial: 'button_create/create_post' %>
+        <%= button_to 'Create post', new_organization_post_path, method: :get,
+                      class: "btn btn-secondary", style: "margin-right: 15px"%>
     <%= button_to 'Update State User', organization_user_path(id: @user.id,name: @user.name ), method: :put,
                   class: "btn btn-secondary", style: "margin-right: 15px"%>
   </div>

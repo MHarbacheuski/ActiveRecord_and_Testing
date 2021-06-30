@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   end
 
   def new
+    @organizations = Organization.find_by(id: params[:organization_id])
     @user = User.new
   end
 

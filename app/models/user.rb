@@ -4,11 +4,10 @@ class User < ApplicationRecord
   validates :state, presence: true
   #validates :status
   validates :organization_id, presence: true
-  validates_associated :posts
   after_initialize { p 'initialize' }
 
   belongs_to :organization
-  has_many :posts, dependent: :destroy
+  has_many :posts
   has_many :images, as: :imageable
 
 end

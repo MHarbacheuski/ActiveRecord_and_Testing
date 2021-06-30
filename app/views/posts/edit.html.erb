@@ -1,29 +1,17 @@
-<!--</br>-->
-<!--</br>-->
-<!--<h4><%#=@organizations.name %></h4>-->
-<!--<table class="table table-hover table-dark">-->
-<!--  <thread>-->
-<!--    <tr>-->
-<!--      <th scope="col">Users</th>-->
-<!--      <th scope="col">Text</th>-->
-<!--      <th scope="col">Status</th>-->
-<!--      <th scope="col"></th>-->
-<!--    </tr>-->
-<!--  </thread>-->
-  <%#- @posts.each do |post|%>
-<!--    <tbody>-->
-<!--    <th scope="col"><%#= form_with  do |form| %>-->
-        <%#= form.collection_select :@user , @user.order(:name),:id,:name %>
-      <%# end %>
-<!--    </th>-->
-<!--    <th scope="col">-->
-      <%#= text_field_tag :text_post,post.text_post %>
-<!--    </th>-->
-<!--    <th scope="col">-->
-      <%#= text_field_tag :status,post.status %>
-<!--    </th>-->
-<!--    <th scope="col"><%#= submit_tag "Save",class:"btn btn-large btn-primary" %></th>-->
-
-<!--    </tbody>-->
-  <%# end %>
-<!--</table>-->
+<h1>Organization: <%= @organization.name %></h1>
+<%= simple_form_for [@organization,@post] do |post| %>
+  <p scope="col">
+    <%= post.collection_select 'user_id', @organization.users.order(:name), :id, :name %>
+  </p>
+  <p scope="col">
+    <%= post.collection_select 'text_post', @organization.posts.select(:text_post).distinct.order(:text_post),
+                               :text_post, :text_post %>
+  </p>
+  <p scope="col">
+    <%= post.collection_select 'status', @organization.posts.select(:status).distinct.order(:status),
+                               :status, :status %>
+  </p>
+  <p scope="col"><%= post.button :submit , class: "btn btn-secondary", style: "margin-top: 15px" %></p>
+<% end %>
+<%= button_to "Delete", organization_post_path(@post),method: :delete,
+              class: "btn btn-secondary", style: "margin-right: 15px"%>

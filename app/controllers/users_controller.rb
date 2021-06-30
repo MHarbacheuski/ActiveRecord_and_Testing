@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   skip_before_action :verify_authenticity_token
-  before_action :find_item, only: %i[update]
+  before_action :find_item, only: %i[update edit]
 
   def index
     @organizations = Organization.find_by(id: params[:organization_id])
@@ -28,6 +28,8 @@ class UsersController < ApplicationController
       render :new
     end
   end
+
+  def edit; end
 
   def update
     if @user.state == 'active'

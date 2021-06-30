@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 class PostsController < ApplicationController
   skip_before_action :verify_authenticity_token
+  before_action :find_post, only: %i[edit update]
+
   def index
     @posts = Post.all
     @organizations = Organization.find_by(id: params[:organization_id])
@@ -21,28 +23,38 @@ class PostsController < ApplicationController
   def create
     organization = Organization.find_by(id: params[:organization_id])
     @post = organization.posts.new(posts_params)
-
     if @post.save
       redirect_to organization_posts_path
     end
   end
 
   def update
-    # @organizations = Organization.find_by(id: params[:organization_id])
-    # @user = User.joins(:organization).where(organizations: @organizations)
-    # #@post = Post.joins(:user).where(organization: @organizations).where(status: params[:status])
-    # @posts = Post.includes(:user, :organization).where(users: @user, organizations: @organizations)
-    # #binding.pry
-    # @posts.update(posts_params)
-    # #binding.pry
-    # redirect_back fallback_location: organization_post_path
+    @post = Post.find(params[:id])
+    if @post.update(posts_params)
+      redirect_to organization_posts_path
+    else
+      render body: 'Poka'
+    end
   end
 
-  def show
-    #binding.pry
+  def edit
+    @organization = Organization.find_by(id: params[:organization_id])
+    @post = Post.find_by(params[:id])
+  end
+
+  def show; end
+
+  def destroy
+    @organization = Organization.find_by(id: params[:organization_id])
+    @post = Post.find_by(params[:id])
   end
 
   private
+
+  def find_post
+    @organization = Organization.where(id: params[:organization_id])
+    render_404 unless @organization
+  end
 
   def posts_params
     params.require(:post).permit(:user_id, :organization_id, :text_post, :status)

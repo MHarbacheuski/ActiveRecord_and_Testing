@@ -1,4 +1,4 @@
-<h1><%= @organization.name %></h1>
+<h1>Organization: <%= @organization.name %></h1>
 <%= form_with(model: @post, url: [@organization,@post]) do |post| %>
 
   <p scope="col">

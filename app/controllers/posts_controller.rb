@@ -11,7 +11,7 @@ class PostsController < ApplicationController
     @posts = Post.select(:status).distinct
     @users = User.joins(:posts, :organization).where(organizations: @organizations)
                  .where('status = 0 AND state = "active"').uniq
-    render layout: 'post'
+    #render layout: 'post'
   end
 
   def new

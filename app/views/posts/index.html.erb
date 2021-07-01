@@ -46,7 +46,7 @@
 </br>
 <%= form_with do |form| %>
 <fieldset class="form-group">
-  <legend class="mt-4">Checkboxes</legend>
+  <legend class="mt-4">Сhoice of status</legend>
     <%- @posts.each do |post| %>
       <%= form.check_box :status %>
       <%= form.label :status,post.status %>

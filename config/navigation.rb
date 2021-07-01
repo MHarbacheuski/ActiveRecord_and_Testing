@@ -2,7 +2,7 @@ SimpleNavigation::Configuration.run do |navigation|
 
   navigation.items do |primary|
 
-    primary.item :key_1, 'name', url, options
+    primary.item :organizations, 'name', url, options
 
     primary.item :key_2, 'name', url, options do |sub_nav|
       # Add an item to the sub navigation (same params again)

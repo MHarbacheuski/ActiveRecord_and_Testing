@@ -2,14 +2,8 @@ class OrganizationsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-
     @organizations = Organization.all
-    #binding.pry
-    #@organizations = Organization.where(id: 1)
-    #binding.pry
-    #@organizations = Organization.find_by(id: params[:organization_id])
-    #@organizations = Organization.joins(:users).where(id: params[:organization_id])
-
+    @organizations = Organization.paginate(page: params[:page], per_page: 20)
   end
 
   def create; end

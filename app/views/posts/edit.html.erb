@@ -13,5 +13,5 @@
   </p>
   <p scope="col"><%= post.button :submit , class: "btn btn-secondary", style: "margin-top: 15px" %></p>
 <% end %>
-<%= button_to "Delete", organization_post_path(@post),method: :delete,
+<%= button_to "Delete", organization_post_path(@post),method: :delete, data: { confirm: 'Are you sure?' },
               class: "btn btn-secondary", style: "margin-right: 15px"%>

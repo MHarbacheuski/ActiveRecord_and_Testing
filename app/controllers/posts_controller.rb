@@ -5,9 +5,7 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all
     @organizations = Organization.find_by(id: params[:organization_id])
-
     @posts = Post.joins(:organization).where(organizations: @organizations)
-
     @posts = Post.select(:status).distinct
     @users = User.joins(:posts, :organization).where(organizations: @organizations)
                  .where('status = 0 AND state = "active"').uniq

@@ -31,3 +31,15 @@
 
 ru:
   welcome: "Добро пожаловать!"
+  organization:
+    name: "Самсунг"
+
+    activerecord:
+      models:
+        item: "Товар"
+      attributes:
+        item:
+          price: "Цена"
+          name: "Название"
+          description: "Описание"
+          weight: "Вес"

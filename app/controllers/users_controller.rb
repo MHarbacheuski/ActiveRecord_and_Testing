@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   before_action :find_item, only: %i[update edit]
 
   def index
+    @user = User.all
     @organizations = Organization.find_by(id: params[:organization_id])
     @user = User.joins(:organization).where(organizations: @organizations)
     @post = Post.joins(:user).where(users: @user, organizations: @organizations)
@@ -16,7 +17,6 @@ class UsersController < ApplicationController
   end
 
   def create
-    #@user = User.find params[:user_id]
     @user = User.create(users_params)
     if @user.persisted?
       # render json: item.name, status:  :created

@@ -15,7 +15,13 @@
     <% end %>
   </li>
   <li class="list-group-item list-group-item-dark">
-    Status user: <%=@user.state %>
+    <%- @post.each do |post| %>
+      Text post: <%= post.text_post%>
+      </br>
+    <% end %>
+  </li>
+  <li class="list-group-item list-group-item-dark">
+    State user: <%=@user.state %>
   </li>
 
 </ul>

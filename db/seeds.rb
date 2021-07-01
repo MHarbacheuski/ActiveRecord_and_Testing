@@ -10,7 +10,6 @@ user = User.all
 post1 = Post.create(user: user[0], organization: org, text_post: "Privet VK", status: "inactive")
 post2 = Post.create(user: user[1], organization: org, text_post: "True Detective cool", status: "under_review")
 post3 = Post.create(user: user[2], organization: org, text_post: "Nice day", status: "active")
-post4 = Post.create(user: user[2], organization: org, text_post: "Bad day", status: "active")
 post5 = Post.create(user: user[3], organization: org, text_post: "Sunshine", status: "archived")
 post6 = Post.create(user: user[4], organization: org, text_post: "Good job", status: "active")
 

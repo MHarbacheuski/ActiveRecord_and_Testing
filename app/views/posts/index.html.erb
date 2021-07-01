@@ -15,7 +15,7 @@
       <th scope="col">Post Status</th>
       <th scope="col">Active User</th>
       <th scope="col">Edit</th>
-      <th scope="col">Text Post</th>
+      <th scope="col">Post count</th>
     </tr>
   </thread>
   <%- @users.each do |user|%>
@@ -27,7 +27,7 @@
       <th><%= button_to 'Edit', edit_organization_post_path(id: user.id),method: :get,
                         class: "btn btn-secondary", style: "margin-right: 15px"%></th>
       <th>
-        <%= user.posts.first.text_post %>
+        <%= user.posts.count%>
       </th>
     </tr>
     </tbody>

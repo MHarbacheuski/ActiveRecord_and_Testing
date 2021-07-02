@@ -2,24 +2,22 @@
 class PostsController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :find_post, only: %i[edit]
+  before_action :find_organization, only: %i[new create]
+
   def index
     @posts = Post.all
     @organizations = Organization.find_by(id: params[:organization_id])
-    @posts = Post.joins(:organization).where(organizations: @organizations)
-    @posts = Post.select(:status).distinct
-    @users = User.joins(:posts, :organization).where(organizations: @organizations)
-                 .where('status = 0 AND state = "active"').uniq
-    #render layout: 'post'
+    @posts = @organizations.posts.build
+    @users = User.joins(:posts, :organization).where(organizations: @organizations, state: 'active')
+                 .where('status = 0').distinct
   end
 
   def new
-    @organization = Organization.find_by(id: params[:organization_id])
     @post = @organization.posts.build
   end
 
   def create
-    organization = Organization.find_by(id: params[:organization_id])
-    @post = organization.posts.build(posts_params)
+    @post = @organization.posts.build(posts_params)
     if @post.save
       redirect_to organization_posts_path
     end
@@ -57,7 +55,11 @@ class PostsController < ApplicationController
     @user = User.find(params[:id])
     @post = Post.find_by(users: @user)
     render_404 unless @organization
+  end
 
+  def find_organization
+    @organization = Organization.find_by(params[:organization_id])
+    render_404 unless @organization
   end
 
   def posts_params

@@ -1,31 +1,26 @@
 require 'will_paginate/array'
 class UsersController < ApplicationController
-
   skip_before_action :verify_authenticity_token
-  before_action :find_item, only: %i[update edit]
+  before_action :find_user, only: %i[update edit]
+  before_action :find_organization, only: %i[new create]
 
   def index
     @user = User.all
     @organizations = Organization.find_by(id: params[:organization_id])
     @user = User.joins(:organization).where(organizations: @organizations)
     @post = Post.joins(:user).where(users: @user, organizations: @organizations)
-    #binding.pry
   end
 
   def new
-    @organizations = Organization.find_by(id: params[:organization_id])
     @user = User.new
   end
 
   def create
     @user = User.create(users_params)
     if @user.persisted?
-      # render json: item.name, status:  :created
-      if @user
-        redirect_to organization_users_path
-      end
+      redirect_to organization_users_path if @user
     else
-      #flash.now[:error] = 'Please fill all fields correctly'
+      flash.now[:error] = 'Please fill all fields correctly'
       render :new
     end
   end
@@ -34,9 +29,9 @@ class UsersController < ApplicationController
 
   def update
     if @user.state == 'active'
-      @user.update(state: "inactive")
+      @user.update(state: 'inactive')
     else
-      @user.update(state: "active")
+      @user.update(state: 'active')
     end
     redirect_back fallback_location: organization_user_path
   end
@@ -49,9 +44,13 @@ class UsersController < ApplicationController
 
   private
 
-  def find_item
+  def find_user
     @user = User.where(id: params[:id]).first
     render_404 unless @user
+  end
+
+  def find_organization
+    @organizations = Organization.find_by(id: params[:organization_id])
   end
 
   def users_params

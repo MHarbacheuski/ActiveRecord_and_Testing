@@ -6,10 +6,11 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all
-    @organizations = Organization.find_by(id: params[:organization_id])
-    @posts = @organizations.posts.build
-    @users = User.joins(:posts, :organization).where(organizations: @organizations, state: 'active')
-                 .where('status = 0').distinct
+    organization_id = params[:organization_id]
+    @organizations = Organization.find_by(id: organization_id) if organization_id
+    @posts = Post.post_to_organization(organization_id).build
+    state = [:active]
+    @users = User.user_state(organization_id, state)
   end
 
   def new
@@ -18,9 +19,7 @@ class PostsController < ApplicationController
 
   def create
     @post = @organization.posts.build(posts_params)
-    if @post.save
-      redirect_to organization_posts_path
-    end
+    redirect_to organization_posts_path if @post.save
   end
 
   def update

@@ -31,20 +31,20 @@
     <% end %>
   </table>
 
-
-  <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
-    <div class="btn-toolbar mr-2" role="group" aria-label="First group">
-      <%= button_to 'Create post', new_organization_post_path, method: :get,
-                    class: "btn btn-secondary", style: "margin-right: 15px" %>
-    </div>
+<div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
+  <div class="btn-toolbar mr-2" role="group" aria-label="First group">
+    <%= button_to 'Create post', new_organization_post_path, method: :get,
+                  class: "btn btn-secondary", style: "margin-right: 15px" %>
   </div>
+</div>
 
+<%= form_with(model: @posts, url: [@organizations,@posts]) do |form| %>
   </br>
 
   <fieldset class="form-group">
     <legend class="mt-4">Сhoice of status post</legend>
     <div scope="col">
-      <%= form_with(model: @posts, url: [@organizations,@posts]) do |form| %>
+
       <%= form.collection_check_boxes :status, @organizations.posts.select(:status).distinct.order(:status), :status, :status%>
     </div>
         <%= button_to 'Filter', organization_posts_path(id:@posts.id,organization:@organizations.id,

@@ -29,6 +29,7 @@ class UsersController < ApplicationController
 
   def pap
     @user = User.first
+    @user = User.last
   end
 
   def update

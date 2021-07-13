@@ -27,6 +27,10 @@ class UsersController < ApplicationController
 
   def edit; end
 
+  def fu
+    User.first
+  end
+
   def update
     if @user.state == 'active'
       @user.update(state: 'inactive')

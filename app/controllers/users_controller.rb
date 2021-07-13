@@ -27,11 +27,6 @@ class UsersController < ApplicationController
 
   def edit; end
 
-  def pap
-    @user = User.first
-    @user = User.last
-  end
-
   def update
     if @user.state == 'active'
       @user.update(state: 'inactive')

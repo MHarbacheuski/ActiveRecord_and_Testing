@@ -2,8 +2,7 @@ class OrganizationsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    @organizations = Organization.all
-    @organizations = Organization.paginate(page: params[:page], per_page: 20)
+    @organizations = Organization.all.paginate(page: params[:page], per_page: 20)
   end
 
   def create; end

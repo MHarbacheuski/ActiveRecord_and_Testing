@@ -6,10 +6,10 @@ class User < ApplicationRecord
   validates :organization_id, presence: true
   after_initialize { p 'initialize' }
   scope :user_state, lambda { |organization_id, state|
-  joins(:posts, :organization)
-    .where(organizations: organization_id, state: state)
-    .where('status = 0').distinct
-}
+                       joins(:posts, :organization)
+                         .where(organizations: organization_id, state: state)
+                         .where('status = 0').distinct
+                     }
 
   belongs_to :organization
   has_many :posts

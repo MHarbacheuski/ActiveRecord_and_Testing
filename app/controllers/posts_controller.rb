@@ -57,7 +57,7 @@ class PostsController < ApplicationController
   end
 
   def find_organization
-    @organization = Organization.find_by(params[:organization_id])
+    @organization = Organization.find_by(id: params[:organization_id])
     render_404 unless @organization
   end
 

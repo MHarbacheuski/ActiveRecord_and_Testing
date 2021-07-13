@@ -2,14 +2,14 @@
 <table class="table table-hover table-dark">
   <thread>
     <tr>
-      <th scope="col">User count: <%= @user.count %></th>
+      <th scope="col">User count: <%= @users.count %></th>
     </tr>
     <tr>
       <th scope="col">Id</th>
       <th scope="col">Name</th>
     </tr>
   </thread>
-  <%- @user.each do |user| %>
+  <%- @users.each do |user| %>
     <tbody>
     <tr data-item_id="<%= user.name %>">
       <th scope="col"><%= user.id %></th>

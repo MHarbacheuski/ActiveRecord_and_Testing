@@ -27,7 +27,7 @@
 </table>
 <div class="digg_pagination">
   <div class="page_info">
-    <%= page_entries_info @organizations %>
+    <%= page_entries_info(@organizations) %>
   </div>
-  <%= will_paginate @organizations, :container => false %>
+  <%= will_paginate @organizations %>
 </div>

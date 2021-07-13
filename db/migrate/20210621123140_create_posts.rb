@@ -7,5 +7,10 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.column :status, :integer, default: 0
       t.timestamps
     end
+
+    add_index :posts, :organization_id
+    add_index :posts, :user_id
+    add_index :posts, :text_post
+    add_index :posts, :status
   end
 end

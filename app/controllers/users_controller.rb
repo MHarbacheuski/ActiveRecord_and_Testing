@@ -5,9 +5,9 @@ class UsersController < ApplicationController
   before_action :find_organization, only: %i[new create]
 
   def index
-    @user = User.all
+    @users = User.all.paginate(page: params[:page], per_page: 20)
     @organizations = Organization.find_by(id: params[:organization_id])
-    @user = User.joins(:organization).where(organizations: @organizations)
+    @users = User.joins(:organization).where(organizations: @organizations)
     @post = Post.joins(:user).where(users: @user, organizations: @organizations)
   end
 
@@ -26,6 +26,10 @@ class UsersController < ApplicationController
   end
 
   def edit; end
+
+  def pap
+    @user = User.first
+  end
 
   def update
     if @user.state == 'active'
